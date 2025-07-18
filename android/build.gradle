@@ -8,7 +8,7 @@ buildscript {
     }
 
     dependencies {
-        classpath("com.android.tools.build:gradle:8.7.3")
+        classpath("com.android.tools.build:gradle:8.7.0")
     }
 }
 
@@ -36,17 +36,6 @@ android {
     }
 
     dependencies {
-        testImplementation("junit:junit:4.13.2")
-        testImplementation("org.mockito:mockito-core:5.0.0")
-    }
-
-    testOptions {
-        unitTests.all {
-            testLogging {
-               events "passed", "skipped", "failed", "standardOut", "standardError"
-               outputs.upToDateWhen {false}
-               showStandardStreams = true
-            }
-        }
+        implementation("com.google.android.gms:play-services-mlkit-document-scanner:16.0.0-beta1")
     }
 }

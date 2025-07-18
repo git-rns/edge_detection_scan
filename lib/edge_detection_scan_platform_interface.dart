@@ -26,4 +26,8 @@ abstract class EdgeDetectionScanPlatform extends PlatformInterface {
   Future<String?> getPlatformVersion() {
     throw UnimplementedError('platformVersion() has not been implemented.');
   }
+
+  Future<List<String>> scanDocument() async {
+    throw UnimplementedError('scanDocument() has not been implemented.');
+  }
 }

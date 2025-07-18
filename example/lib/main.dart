@@ -1,8 +1,9 @@
-import 'package:flutter/material.dart';
 import 'dart:async';
+import 'dart:io';
 
-import 'package:flutter/services.dart';
 import 'package:edge_detection_scan/edge_detection_scan.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +18,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
-  final _edgeDetectionScanPlugin = EdgeDetectionScan();
+  final documentScannerPlugin = EdgeDetectionScan();
 
   @override
   void initState() {
@@ -32,7 +33,8 @@ class _MyAppState extends State<MyApp> {
     // We also handle the message potentially returning null.
     try {
       platformVersion =
-          await _edgeDetectionScanPlugin.getPlatformVersion() ?? 'Unknown platform version';
+          await documentScannerPlugin.getPlatformVersion() ??
+          'Unknown platform version';
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
     }
@@ -47,14 +49,31 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
+  List<String> scannedPaths = [];
+
+  Future<void> scan() async {
+    final result = await documentScannerPlugin.scanDocument();
+    setState(() => scannedPaths = result);
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Plugin example app'),
+        appBar: AppBar(title: const Text('Plugin example app')),
+        body: Column(
+          children: [
+            ElevatedButton(onPressed: scan, child: const Text("Scan Document")),
+            Expanded(
+              child: ListView.builder(
+                itemCount: scannedPaths.length,
+                itemBuilder: (_, index) =>
+                    Image.file(File(scannedPaths[index]), height: 250),
+              ),
+            ),
+          ],
         ),
-        body: Center(
+        floatingActionButton: Center(
           child: Text('Running on: $_platformVersion\n'),
         ),
       ),
