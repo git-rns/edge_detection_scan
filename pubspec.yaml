@@ -1,5 +1,5 @@
 name: edge_detection_scan
-description: "A new Flutter project."
+description: "A cross-platform Flutter plugin that provides native document scanning with automatic edge detection, returning high-quality scanned image paths from both Android and iOS."
 version: 0.0.1
 repository: https://github.com/git-rns/edge_detection_scan
 
