@@ -60,21 +60,29 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(title: const Text('Plugin example app')),
-        body: Column(
-          children: [
-            ElevatedButton(onPressed: scan, child: const Text("Scan Document")),
-            Expanded(
-              child: ListView.builder(
-                itemCount: scannedPaths.length,
-                itemBuilder: (_, index) =>
-                    Image.file(File(scannedPaths[index]), height: 250),
+        appBar: AppBar(title: const Text('Edge Detection Scan')),
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Running on: $_platformVersion\n'),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: scannedPaths.length,
+                  itemBuilder: (_, index) => Padding(
+                    padding: const EdgeInsets.only(bottom: 8.0),
+                    child: Image.file(File(scannedPaths[index]), height: 250),
+                  ),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-        floatingActionButton: Center(
-          child: Text('Running on: $_platformVersion\n'),
+        floatingActionButton: FloatingActionButton.extended(
+          onPressed: scan,
+          label: Text('Scan'),
+          icon: Icon(Icons.document_scanner_rounded),
         ),
       ),
     );
