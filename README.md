@@ -20,25 +20,6 @@ A cross-platform Flutter plugin that provides native document scanning with auto
 
 ---
 
-## 📦 Installation
-
-Add the package in your `pubspec.yaml`: 
-
-```yaml
-dependencies:
-  edge_detection_scan:^<version_no>
-
-          (or)
-
-  edge_detection_scan:
-    git:
-      url: https://github.com/git-rns/edge_detection_scan.git
-```
-
-Replace the URL with your [pub.dev](https://pub.dev) link once published.
-
----
-
 ## 🛠 Platform Configuration
 
 ### 🔹 Android
